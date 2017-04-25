@@ -23,8 +23,8 @@ private func jsonStringify(_ obj: [AnyHashable: Any]) -> String {
 }
 
 
-class SearchViewController: UIViewController, WKScriptMessageHandler, WKNavigationDelegate {
-
+class SearchViewController: UIViewController, WKScriptMessageHandler, WKNavigationDelegate, HotelSortViewControllerDelegate, HotelFilterControllerDelegate{
+    
     struct Search {
         let location: String
         let dateStart: Date
@@ -38,9 +38,25 @@ class SearchViewController: UIViewController, WKScriptMessageHandler, WKNavigati
             ])
         }
     }
-
+    
+    struct Filter{
+        let minPrice: Int
+        let maxPrice: Int
+        
+        var asJSONString: String{
+            return jsonStringify([
+                "priceMin": minPrice,
+                "priceMax": maxPrice
+            ])
+        }
+    }
+    
+    @IBOutlet weak var navigationTitle: UINavigationItem!
     private var _searchToRun: Search?
-
+    private var _selectedHotel: AnyObject?
+    private var _minPrice: Int?
+    private var _maxPrice: Int?
+    
     lazy var webView: WKWebView = {
         let webView = WKWebView(frame: CGRect.zero, configuration: {
             let config = WKWebViewConfiguration()
@@ -50,7 +66,8 @@ class SearchViewController: UIViewController, WKScriptMessageHandler, WKNavigati
                 // DECLARE YOUR MESSAGE HANDLERS HERE
                 userContentController.add(self, name: "API_READY")
                 userContentController.add(self, name: "HOTEL_API_HOTEL_SELECTED")
-
+                userContentController.add(self, name: "HOTEL_API_RESULTS_READY")
+                
                 return userContentController
             }()
             return config
@@ -74,6 +91,7 @@ class SearchViewController: UIViewController, WKScriptMessageHandler, WKNavigati
         alertController.addAction(UIAlertAction(title: NSLocalizedString("Bummer", comment: ""), style: .default, handler: nil))
         self.navigationController?.present(alertController, animated: true, completion: nil)
     }
+    
 
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         switch message.name {
@@ -83,8 +101,70 @@ class SearchViewController: UIViewController, WKScriptMessageHandler, WKNavigati
                 "window.JSAPI.runHotelSearch(\(searchToRun.asJSONString))",
                 completionHandler: nil)
         case "HOTEL_API_HOTEL_SELECTED":
+            let dict = message.body as! [String:AnyObject]
+            _selectedHotel = dict["result"]
             self.performSegue(withIdentifier: "hotel_details", sender: nil)
+        case "HOTEL_API_RESULTS_READY":
+            updateResultsCounter()
         default: break
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "select_sort"){
+            let destination = segue.destination
+            guard let navVC = destination as? UINavigationController,
+                let HotelSortController = navVC.topViewController as? HotelSortController else {
+                    fatalError("Segue destination has unexpected type")
+            }
+            HotelSortController.delegate = self
+        }
+        if(segue.identifier == "hotel_details"){
+            let nextScene =  segue.destination as! HotelViewController
+            nextScene.hotelInfo = _selectedHotel
+        }
+        
+        if(segue.identifier == "select_filters"){
+            let destination = segue.destination
+            guard let navVC = destination as? UINavigationController,
+                let HotelFilterController = navVC.topViewController as? HotelFilterController else {
+                    fatalError("Segue destination has unexpected type")
+            }
+            HotelFilterController.delegate = self
+            HotelFilterController.defaultMaxPrice = _maxPrice
+            HotelFilterController.defaultMinPrice = _minPrice
+            
+        }
+    }
+    
+    func updateHotelSort(viewController: HotelSortController, didUpdateSort sort: String) {
+        self.webView.evaluateJavaScript(
+            "window.JSAPI.setHotelSort(\"\(sort)\")",
+            completionHandler: nil)
+    }
+    
+    func updateHotelFilter(minPrice: Int, maxPrice: Int) {
+        _minPrice = minPrice
+        _maxPrice = maxPrice
+        
+        let filters = Filter(minPrice: minPrice, maxPrice: maxPrice)
+        
+        let stringifiedFilters = filters.asJSONString
+        
+        self.webView.evaluateJavaScript(
+            "window.JSAPI.setHotelFilters(\(stringifiedFilters))",
+            completionHandler: nil)
+        
+        updateResultsCounter()
+    }
+    
+    func updateResultsCounter(){
+        let jsString = "document.getElementsByTagName(\"li\").length"
+        
+        self.webView.evaluateJavaScript(
+            jsString, completionHandler:{(data, err) in
+                let count = data as! Int
+                self.navigationTitle.title = "\(count) Hotel(s) Found"
+        })
     }
 }

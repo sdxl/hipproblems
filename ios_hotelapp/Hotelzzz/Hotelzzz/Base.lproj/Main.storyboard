@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="PWI-c0-zZZ">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="PWI-c0-zZZ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -45,13 +45,13 @@
                                 <rect key="frame" x="16" y="190" width="343" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check in" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="96Z-Nc-Zbr">
-                                        <rect key="frame" x="0.0" y="0.0" width="172" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="171.5" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check out" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dDw-Rs-RxP">
-                                        <rect key="frame" x="172" y="0.0" width="171" height="30"/>
+                                        <rect key="frame" x="171.5" y="0.0" width="171.5" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -65,14 +65,14 @@
                                 <rect key="frame" x="16" y="220" width="343" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Icd-xQ-tLg">
-                                        <rect key="frame" x="0.0" y="0.0" width="172" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="171.5" height="30"/>
                                         <state key="normal" title="2017-04-01"/>
                                         <connections>
                                             <segue destination="2hl-6e-Iig" kind="presentation" identifier="pick_check_in_date" id="WcD-aZ-s7t"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zeC-8W-8hU">
-                                        <rect key="frame" x="172" y="0.0" width="171" height="30"/>
+                                        <rect key="frame" x="171.5" y="0.0" width="171.5" height="30"/>
                                         <state key="normal" title="2017-04-04"/>
                                         <connections>
                                             <segue destination="2hl-6e-Iig" kind="presentation" identifier="pick_check_out_date" id="p72-FD-jVd"/>
@@ -122,34 +122,48 @@
             <point key="canvasLocation" x="-266" y="-24"/>
         </scene>
         <!--Select hotel sort-->
-        <scene sceneID="mh3-Cf-Las">
+        <scene sceneID="RaN-AZ-9p3">
             <objects>
-                <viewController id="FPC-mT-DqL" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="mMd-bS-xwf"/>
-                        <viewControllerLayoutGuide type="bottom" id="mh3-fF-0pC"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="EVe-IB-NxI">
+                <tableViewController id="d3A-XS-HeD" customClass="HotelSortController" customModule="Hotelzzz" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="iVZ-yk-mMy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Select hotel sort" id="Pwl-3H-5Qg">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="43f-hx-Bg0">
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="optionCell" id="B5L-wc-YeT">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="B5L-wc-YeT" id="18P-o0-vWe">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="d3A-XS-HeD" id="Uxf-DF-tFX"/>
+                            <outlet property="delegate" destination="d3A-XS-HeD" id="kTa-0P-ZQN"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Select hotel sort" id="4xo-e8-d96">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="i2K-3F-QbN">
                             <connections>
-                                <action selector="dismissWithSender:" destination="FPC-mT-DqL" id="Ttg-CO-V0Y"/>
+                                <action selector="dismissWithSender:" destination="d3A-XS-HeD" id="xzt-h9-S9m"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Bp3-vB-aZc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                    <connections>
+                        <outlet property="optionsTable" destination="iVZ-yk-mMy" id="p5Y-6p-hXX"/>
+                        <outlet property="tableView" destination="iVZ-yk-mMy" id="IzE-ww-iaD"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bPr-zm-B5z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2478" y="-656"/>
+            <point key="canvasLocation" x="2658" y="-656"/>
         </scene>
         <!--Select hotel filters-->
         <scene sceneID="bkW-2h-LaA">
             <objects>
-                <viewController id="cIZ-1D-rMf" sceneMemberID="viewController">
+                <viewController id="cIZ-1D-rMf" customClass="HotelFilterController" customModule="Hotelzzz" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kd1-wR-CGV"/>
                         <viewControllerLayoutGuide type="bottom" id="mcT-pb-YxW"/>
@@ -157,6 +171,44 @@
                     <view key="view" contentMode="scaleToFill" id="q2P-9E-9Jp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Min Price" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="6qa-QL-aKl">
+                                <rect key="frame" x="139" y="215" width="97" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Max Price" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="cCu-14-lC7">
+                                <rect key="frame" x="139" y="383" width="97" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Min Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wsc-Wa-hPn">
+                                <rect key="frame" x="151" y="186" width="72" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Max Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bqa-nU-i6L">
+                                <rect key="frame" x="149" y="354" width="76" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wUJ-gg-8Qg">
+                                <rect key="frame" x="166" y="465" width="42" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="DONE"/>
+                                <connections>
+                                    <action selector="submitFilters:" destination="cIZ-1D-rMf" eventType="touchUpInside" id="XJD-QJ-qP0"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Select hotel filters" id="Kkd-oh-Evl">
@@ -166,15 +218,19 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="maxPriceInput" destination="cCu-14-lC7" id="dxg-7E-yLn"/>
+                        <outlet property="minPriceInput" destination="6qa-QL-aKl" id="6Ea-xZ-TaR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rab-A5-nXD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2478" y="-2"/>
+            <point key="canvasLocation" x="2634" y="-2"/>
         </scene>
         <!--Searching...-->
         <scene sceneID="eSi-zF-Gld">
             <objects>
-                <viewController id="mfQ-fo-jKR" customClass="SearchViewController" customModule="Hotelzzz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="searchView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mfQ-fo-jKR" customClass="SearchViewController" customModule="Hotelzzz" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cBr-eL-NOo"/>
                         <viewControllerLayoutGuide type="bottom" id="d2L-fT-6oP"/>
@@ -203,6 +259,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="navigationTitle" destination="z0V-Hf-7Gn" id="1fK-EG-Jcq"/>
                         <segue destination="hMw-It-0eG" kind="show" identifier="hotel_details" id="jwc-WB-JAt"/>
                     </connections>
                 </viewController>
@@ -234,6 +291,24 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BXy-zK-xWr">
+                                <rect key="frame" x="166" y="468" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x96-VF-fmp">
+                                <rect key="frame" x="68" y="216" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5GE-gR-1gE">
+                                <rect key="frame" x="16" y="387" width="343" height="73"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -245,12 +320,15 @@
                     </view>
                     <navigationItem key="navigationItem" title="Hotel Details" id="BkP-pu-yFu"/>
                     <connections>
+                        <outlet property="hotelAddressLabel" destination="5GE-gR-1gE" id="PoG-Wn-xJ1"/>
+                        <outlet property="hotelImageContainer" destination="x96-VF-fmp" id="Ka5-jP-8sm"/>
                         <outlet property="hotelNameLabel" destination="5xY-Ql-xxp" id="Bfq-mC-hhs"/>
+                        <outlet property="hotelPriceLabel" destination="BXy-zK-xWr" id="P4y-aj-Dcs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4jN-m1-8O9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1538" y="740"/>
+            <point key="canvasLocation" x="1536.8" y="739.88005997001505"/>
         </scene>
         <!--Date Picker View Controller-->
         <scene sceneID="xh7-QO-b3X">
@@ -349,7 +427,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="FPC-mT-DqL" kind="relationship" relationship="rootViewController" id="47n-sE-dk4"/>
+                        <segue destination="d3A-XS-HeD" kind="relationship" relationship="rootViewController" id="Hxm-pq-ruj"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="65e-tC-Iz8" userLabel="First Responder" sceneMemberID="firstResponder"/>
