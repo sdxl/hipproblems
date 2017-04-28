@@ -39,14 +39,14 @@ class SearchViewController: UIViewController, WKScriptMessageHandler, WKNavigati
         }
     }
     
-    struct Filter{
-        let minPrice: Int
-        let maxPrice: Int
+    struct PriceFilter{
+        let minPrice: String
+        let maxPrice: String
         
         var asJSONString: String{
             return jsonStringify([
-                "priceMin": minPrice,
-                "priceMax": maxPrice
+                "priceMin": minPrice == "" ? "null" : minPrice,
+                "priceMax": maxPrice == "" ? "null" : maxPrice
             ])
         }
     }
@@ -54,8 +54,8 @@ class SearchViewController: UIViewController, WKScriptMessageHandler, WKNavigati
     @IBOutlet weak var navigationTitle: UINavigationItem!
     private var _searchToRun: Search?
     private var _selectedHotel: AnyObject?
-    private var _minPrice: Int?
-    private var _maxPrice: Int?
+    private var _minPrice: String?
+    private var _maxPrice: String?
     
     lazy var webView: WKWebView = {
         let webView = WKWebView(frame: CGRect.zero, configuration: {
@@ -143,16 +143,17 @@ class SearchViewController: UIViewController, WKScriptMessageHandler, WKNavigati
             completionHandler: nil)
     }
     
-    func updateHotelFilter(minPrice: Int, maxPrice: Int) {
+    func updateHotelFilter(minPrice: String, maxPrice: String) {
         _minPrice = minPrice
         _maxPrice = maxPrice
         
-        let filters = Filter(minPrice: minPrice, maxPrice: maxPrice)
+        let minPrice = minPrice == "" ? "null" : minPrice
+        let maxPrice = maxPrice == "" ? "null" : maxPrice
         
-        let stringifiedFilters = filters.asJSONString
+        let priceFilter = PriceFilter(minPrice: minPrice, maxPrice: maxPrice)
         
         self.webView.evaluateJavaScript(
-            "window.JSAPI.setHotelFilters(\(stringifiedFilters))",
+            "window.JSAPI.setHotelFilters(\(priceFilter.asJSONString))",
             completionHandler: nil)
         
         updateResultsCounter()
